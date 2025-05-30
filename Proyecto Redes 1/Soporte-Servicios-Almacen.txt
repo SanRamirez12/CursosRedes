@@ -1,0 +1,112 @@
+##### Router Soporte/Almacen/Servicios ###################################
+ena
+
+conf t
+
+hostname Router_SSA
+
+INTERFACES:
+ena
+
+conf t
+
+int s 0/0/0 
+ip add  192.168.1.118 255.255.255.252
+no shut
+exit 
+
+int s 0/0/1
+ip add 192.168.1.113 255.255.255.252
+no shut
+exit 
+
+router rip
+version 2
+no auto
+net 192.168.1.0
+net 192.168.1.64
+net 192.168.1.96
+net 192.168.1.112
+net 192.168.1.116
+exit
+
+int g 0/0.30
+encapsulation dot1q 30
+ip add 192.168.1.1 255.255.255.192
+
+int g 0/0.50
+encapsulation dot1q 50
+ip add 192.168.1.97 255.255.255.240
+
+int g 0/0
+no shut
+
+int g 0/1.40
+encapsulation dot1q 40
+ip add 192.168.1.65 255.255.255.224
+
+int g 0/1
+no shut
+
+ip dhcp pool Pool_Soporte
+network 192.168.1.0 255.255.255.192
+default-router 192.168.1.1
+dns-server 192.168.1.98
+exit
+
+ip dhcp pool Pool_Almacen
+network 192.168.1.64 255.255.255.224
+default-router 192.168.1.65
+dns-server 192.168.1.98
+exit
+
+ip dhcp pool Pool_Servicios
+network 192.168.1.96 255.255.255.240
+default-router 192.168.1.97
+dns-server 192.168.1.98
+exit
+########################  Switch Almacen #########################
+ena
+conf t
+hostname Switch_Almacen
+
+vlan 40
+name VLAN40
+exit
+
+int range f0/1-24
+sw mode Access
+sw access vlan 40
+exit
+
+int g0/1
+sw mode trunk 
+switchport trunk allowed vlan 40
+
+##################### Switch Soporte&Servicios#########################
+ena
+conf t
+hostname Switch_Soporte&Servicios
+
+vlan 30
+name VLAN30
+exit
+
+vlan 50
+name VLAN50
+exit
+
+int range f0/1-14
+sw mode Access
+sw access vlan 30
+exit
+
+int range f0/15-24
+sw mode Access
+sw access vlan 50
+exit
+
+int g0/1
+sw mode trunk 
+switchport trunk allowed vlan 30,50
+

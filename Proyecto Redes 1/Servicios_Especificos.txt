@@ -1,0 +1,19 @@
+################################ DNS ########################################
+################## Mail #################################
+Tipo: A Record
+Name: mail.contabiliza.com
+Adress: 192.168.1.98
+
+################## Net Corporativa ########################
+Tipo: A Record
+Name: intranet.contabiliza.com
+Adress: 192.168.1.98
+
+Tipo: CNAME
+Name: www.intranet.contabiliza.com
+Host Name: intranet.contabiliza.com
+
+
+##################### Email ##############################33
+
+Domain Name: contabiliza.com

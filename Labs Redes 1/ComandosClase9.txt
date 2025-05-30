@@ -1,0 +1,57 @@
+### ROUTER 0 ###
+
+ena
+
+conf t
+
+int g 0/0
+ip add 192.168.10.1 255.255.255.240
+no shut 
+exit
+
+int s 0/0/0 
+ip add 10.0.0.1 255.255.255.252
+no shut
+exit 
+
+router rip
+version 2
+no auto
+net 192.168.10.0
+net 10.0.0.0
+exit
+
+ip dhcp pool 192.168.10.0 
+network 192.168.10.0 255.255.255.240
+default-router 192.168.10.1
+
+### ROUTER 1 ###
+
+ena
+
+conf t
+
+int g 0/0
+ip add 172.16.0.1 255.255.255.248
+no shut 
+exit
+
+int g 0/1
+ip add 172.16.10.1 255.255.255.248
+no shut 
+exit
+
+int s 0/0/0
+ip add 10.0.0.2 255.255.255.252
+no shut
+exit
+
+
+router rip
+version 2
+no auto
+net 10.0.0.0
+net 172.16.0.0
+net 172.16.10.0
+exit
+

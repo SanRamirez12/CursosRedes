@@ -1,0 +1,61 @@
+##### Router Admin #######################################################
+ena
+
+conf t
+
+hostname Router_Admin
+
+INTERFACES:
+ena
+
+conf t
+
+int s 0/0/0 
+ip add 192.168.1.122 255.255.255.252
+no shut
+exit 
+
+int s 0/0/1
+ip add 192.168.1.114 255.255.255.252
+no shut
+exit 
+
+router rip
+version 2
+no auto
+net 192.168.0.128
+net 192.168.1.112
+net 192.168.1.120
+exit
+
+int g 0/0.20
+encapsulation dot1q 20
+ip add 192.168.0.129 255.255.255.128
+
+int g 0/0
+no shut
+
+ip dhcp pool Pool_Admin
+network 192.168.0.128 255.255.255.128
+default-router 192.168.0.129
+dns-server 192.168.1.98
+exit
+
+
+######################### Switch Administración #####################################
+ena
+conf t
+hostname Switch_Admin
+
+vlan 20
+name VLAN20
+exit
+
+int range f0/1-24
+sw mode Access
+sw access vlan 20
+exit
+
+int g0/1
+sw mode trunk 
+switchport trunk allowed vlan 20

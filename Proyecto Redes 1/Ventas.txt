@@ -1,0 +1,93 @@
+############################### Router Ventas ######################################################
+ena
+
+conf t
+
+hostname Router_Ventas
+
+INTERFACES: 
+ena
+
+conf t
+
+int s 0/0/0 
+ip add 192.168.1.117 255.255.255.252
+no shut
+exit 
+
+int s 0/0/1
+ip add 192.168.1.121 255.255.255.252
+no shut
+exit 
+
+router rip
+version 2
+no auto
+net 192.168.0.0
+net 192.168.1.116
+net 192.168.1.120
+exit
+
+int g 0/0.10
+encapsulation dot1q 10
+ip add 192.168.0.1 255.255.255.128
+
+int g 0/0
+no shut
+
+ip dhcp pool Pool_Ventas
+network 192.168.0.0 255.255.255.128
+default-router 192.168.0.1
+dns-server 192.168.1.98
+exit
+
+
+##################################################################################################
+################################## Switch Principal Ventas #######################################
+ena
+conf t
+hostname Switch_Principal_Ventas
+
+vlan 10
+name VLAN10
+exit
+
+int range f0/1-24
+sw mode access
+sw access vlan 10
+exit
+
+int g0/1
+sw mode trunk 
+switchport trunk allowed vlan 10
+
+
+int g0/2
+sw mode trunk 
+switchport trunk allowed vlan 10
+
+
+
+############################### Switch Principal Secundario #########################
+ena
+conf t
+hostname Switch_Principal_Secundario
+
+vlan 10
+name VLAN10
+exit
+
+int range f0/1-24
+sw mode Access
+sw access vlan 10
+exit
+
+int g0/1
+sw mode trunk 
+switchport trunk allowed vlan 10
+
+
+
+
+
+
