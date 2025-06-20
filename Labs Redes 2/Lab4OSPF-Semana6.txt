@@ -1,0 +1,114 @@
+#######################Router San Jose#######################
+ena
+conf t
+hostname R_SanJose
+
+int g 0/0 
+ip add 192.168.0.1 255.255.255.0
+no shut
+exit
+
+int s 0/0/0 
+ip add 10.0.0.9 255.255.255.252
+clock rate 4000000 
+no shut
+exit
+
+int s 0/0/1 
+ip add 10.0.0.5 255.255.255.252
+clock rate 4000000 
+no shut
+exit
+
+do wr
+
+router ospf 1
+net 192.168.0.0 0.0.0.255 area 0
+net 10.0.0.8 0.0.0.3 area 0
+net 10.0.0.4 0.0.0.3 area 0
+no auto
+exit
+
+int s 0/0/0
+bandwidth 30
+exit 
+int s 0/0/1
+bandwidth 30
+exit 
+do wr
+#######################Router Heredia########################
+ena
+conf t
+hostname R_Heredia
+
+int g 0/0 
+ip add 192.168.2.1 255.255.255.0
+no shut
+exit
+
+int s 0/0/0 
+ip add 10.0.0.10 255.255.255.252
+clock rate 4000000 
+no shut
+exit
+
+int s 0/0/1 
+ip add 10.0.0.1 255.255.255.252
+clock rate 4000000 
+no shut
+exit
+
+do wr
+
+router ospf 1
+net 192.168.2.0 0.0.0.255 area 0
+net 10.0.0.8 0.0.0.3 area 0
+net 10.0.0.0 0.0.0.3 area 0
+no auto
+exit
+
+int s 0/0/0
+bandwidth 30
+exit 
+int s 0/0/1
+bandwidth 30
+exit 
+do wr
+######################Router Cartago#########################
+ena
+conf t
+hostname R_Cartago
+
+int g 0/0 
+ip add 192.168.1.1 255.255.255.0
+no shut
+exit
+
+int s 0/0/0 
+ip add 10.0.0.6 255.255.255.252
+clock rate 4000000 
+no shut
+exit
+
+int s 0/0/1 
+ip add 10.0.0.2 255.255.255.252
+clock rate 4000000 
+no shut
+exit
+
+do wr
+
+router ospf 1
+net 192.168.1.0 0.0.0.255 area 0
+net 10.0.0.0 0.0.0.3 area 0
+net 10.0.0.4 0.0.0.3 area 0
+no auto
+exit
+
+int s 0/0/0
+bandwidth 30
+exit 
+int s 0/0/1
+bandwidth 30
+exit 
+do wr
