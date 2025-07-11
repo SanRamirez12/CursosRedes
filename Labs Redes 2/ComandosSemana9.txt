@@ -1,0 +1,73 @@
+############### Router 0 #########################################
+ena 
+conf t
+hostname R1_REDCABLEADA
+
+int s 0/0/0
+ip add 30.20.10.1 255.255.255.0
+no shut
+exit
+
+int f0/0 
+ip add 192.168.10.1 255.255.255.0
+no shut
+exit
+
+ip dhcp excluded-address 192.168.10.1 
+ip dhcp pool Red2Ulatina
+network 192.168.10.0 255.255.255.0 
+default-router 192.168.10.1
+dns-server 192.168.10.1 
+exit
+
+router eigrp 10 
+network 192.168.10.0 0.0.0.255 
+network 30.20.10.0 0.0.0.255 
+network 192.168.11.0 0.0.0.255
+exit
+################# Switch 0 ##########################################
+
+ena
+conf t
+
+int f0/1
+switchport mode trunk 
+no shut
+exit
+
+############### Router 1 #########################################
+ena 
+conf t
+hostname R1_REDWIFI 
+
+int s 0/0/0
+ip add 30.20.10.2 255.255.255.0
+no shut
+exit
+
+int f0/0 
+ip add 192.168.11.1 255.255.255.0
+no shut
+exit
+
+ip dhcp excluded-address 192.168.10.1 
+ip dhcp pool RED_WIFI_REDES2 
+network 192.168.11.0 255.255.255.0 
+default-router 192.168.11.1 
+dns-server 192.168.11.1 
+exit
+
+router eigrp 10 
+network 192.168.10.0 0.0.0.255 
+network 30.20.10.0 0.0.0.255 
+network 192.168.11.0 0.0.0.255
+exit
+################# Switch 1 ##########################################
+
+ena
+conf t
+
+int f0/1
+switchport mode trunk 
+no shut
+exit
