@@ -1,0 +1,85 @@
+####################### Router Claro #######################################################################
+ena 
+conf t
+
+hostname BGP_Claro
+
+int s0/1/0
+ip add 10.0.0.2 255.255.255.252
+no shut 
+exit
+
+
+int s0/1/1
+ip add 10.0.0.9 255.255.255.252
+no shut
+exit
+
+
+int f0/0
+ip add 192.168.1.1 255.255.255.0
+no shut
+exit
+
+router bgp 100  
+network 192.168.1.0 mask 255.255.255.0 
+network 10.0.0.0 mask 255.255.255.252 
+network 10.0.0.8 mask 255.255.255.252 
+neighbor 10.0.0.1 remote-as 300 
+neighbor 10.0.0.10 remote-as 200 
+exit
+
+####################### Router Liberty #######################################################################
+ena 
+conf t
+
+hostname BGP_Liberty
+
+int s0/1/0
+ip add 10.0.0.10 255.255.255.252
+no shut 
+exit
+
+
+int s0/1/1
+ip add 10.0.0.6 255.255.255.252
+no shut
+exit
+
+
+int f0/0
+ip add 192.168.2.1 255.255.255.0
+no shut
+exit
+
+router bgp 200
+network 192.168.2.0 mask 255.255.255.0 
+network 10.0.0.0 mask 255.255.255.252 
+network 10.0.0.4 mask 255.255.255.252 
+neighbor 10.0.0.9 remote-as 100 
+neighbor 10.0.0.5 remote-as 300 
+exit
+
+####################### Router ICE #######################################################################
+ena 
+conf t
+
+hostname BGP_ICE
+
+int s0/1/0
+ip add 10.0.0.1 255.255.255.252
+no shut 
+exit
+
+
+int s0/1/1
+ip add 10.0.0.5 255.255.255.252
+no shut
+exit
+
+router bgp 300 
+network 10.0.0.0 mask 255.255.255.252 
+network 10.0.0.4 mask 255.255.255.252 
+neighbor 10.0.0.2 remote-as 100 
+neighbor 10.0.0.6 remote-as 200 
+exit
