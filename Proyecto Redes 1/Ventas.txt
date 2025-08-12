@@ -82,11 +82,27 @@ sw mode Access
 sw access vlan 10
 exit
 
+interface range fa0/20 - 24
+ switchport mode access
+ switchport access vlan 30
+exit
+
 int g0/1
 sw mode trunk 
 switchport trunk allowed vlan 10
 
+interface gig0/1
+ description Trunk hacia SwitchAulas
+ switchport mode trunk
+exit
 
+interface gig0/2
+ description Trunk hacia RouterSecundario
+ switchport mode trunk
+exit
+
+end
+write memory
 
 
 
