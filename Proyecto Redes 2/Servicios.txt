@@ -1,0 +1,87 @@
+################### DNS Server #####################
+IP address: 192.168.1.2
+DNS Service: On
+Tipo: A record
+Name: www.nexacapital.com
+Address: 192.168.1.2
+
+Tipo: C NAME
+Name: nexacapital.com
+Host: www.nexacapital.com
+
+
+Para mail:
+Tipo: A record
+Name: mail.nexacapital.com
+Address: 192.168.1.2
+Servidor SMTP: mail.nexacapital.com
+Servidor POP3: mail.nexacapital.com
+
+
+############# Mail Server ######################
+SMTP Service: ON
+POP3 Service: ON
+Domain Name: mail.nexacapital.com
+Usuarios: integrantes
+passwords: 1234
+
+############# HTTP Server ######################
+######################### index.html:
+<html>
+  <head>
+    <title>NexaCapital - Finanzas</title>
+  </head>
+  <body>
+    <center><font size="+2" color="blue">NexaCapital</font></center>
+    <hr>
+    Bienvenido a <b>NexaCapital</b>, un organismo reconocido por sus
+    <b>servicios de préstamos</b> y por la <b>enseñanza de finanzas</b> para
+    inversión a corto y largo plazo. Crecemos de la mano de nuestros clientes,
+    ofreciendo claridad y acompañamiento en cada decisión.
+
+    <p>
+      La reciente volatilidad del dólar incrementó la demanda y nos llevó a
+      ampliar nuestro equipo y departamentos para servirte mejor.
+    </p>
+
+    <p>Quick Links:
+      <br><a href="historia.html">Nuestra historia</a>
+      <br><a href="mailto:info@nexacapital.com">Contacto</a>
+      <br><a href="logo.jpg">Logo</a>
+    </p>
+  </body>
+</html>
+
+######################### historia.html:
+<html>
+  <head>
+    <title>NexaCapital - Historia</title>
+  </head>
+  <body>
+    <center><font size="+2" color="blue">Nuestra historia</font></center>
+    <hr>
+
+    <p>
+      <b>Origen:</b> NexaCapital nació con la misión de acercar el crédito
+      responsable y la educación financiera a personas y negocios, impulsando
+      inversiones seguras a <i>corto</i> y <i>largo</i> plazo.
+    </p>
+
+    <p>
+      <b>Crecimiento:</b> La inestabilidad cambiaria aumentó la demanda de
+      asesoría y préstamos. Para responder, la empresa amplió su plantilla y
+      reestructuró procesos internos.
+    </p>
+
+    <p>
+      <b>Hoy contamos con 4 departamentos:</b>
+      Finanzas, Tecnología de la Información (TI), Administración y
+      Recursos Humanos. Aunque nuestro corazón es <b>finanzas</b>, estamos
+      modernizando nuestra comunicación interna y sistemas para atenderte con
+      mayor rapidez y transparencia.
+    </p>
+
+    <p><a href="index.html">⟵ Volver al inicio</a></p>
+  </body>
+</html>
+

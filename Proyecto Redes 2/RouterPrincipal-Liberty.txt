@@ -1,0 +1,60 @@
+###################### Router Liberty #############################
+ena
+conf t
+hostname RouterLiberty
+no ip domain-lookup
+
+interface Serial0/1/0
+description Conexión a RouterPrincipal
+ip address 10.0.0.2 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+! BGP
+router bgp 100
+neighbor 10.0.0.1 remote-as 200
+exit
+
+
+###################### Router Principal #############################
+ena
+conf t
+hostname RouterPrincipal
+no ip domain-lookup
+
+! Interfaces
+interface Serial0/1/0
+description Conexión a RouterLiberty
+ip address 10.0.0.1 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+interface Serial0/1/1
+description Conexión a RouterFin-RH
+ip address 192.168.1.33 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+interface Serial0/2/0
+description Conexión a RouterAdmin-TI
+ip address 192.168.1.37 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+! OSPF (anuncio de enlaces internos/seriales)
+router ospf 1
+router-id 1.1.1.1
+network 192.168.1.32 0.0.0.3 area 0
+network 192.168.1.36 0.0.0.3 area 0
+redistribute bgp 200 subnets
+exit
+
+! BGP (conexión a Liberty y anuncio de OSPF hacia BGP)
+router bgp 200
+neighbor 10.0.0.2 remote-as 100
+redistribute ospf 1
+exit

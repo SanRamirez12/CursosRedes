@@ -1,0 +1,225 @@
+################## SwitcheFin ##########################
+ena
+conf t
+hostname SwitchFin
+no ip domain-lookup
+
+vlan 10
+name FINANZAS
+exit
+
+! Puertos de usuario a VLAN 10
+interface range fa0/1-24
+switchport mode access
+switchport access vlan 10
+exit
+
+! Uplink al router (si aplica) por G0/1 en VLAN 10
+interface g0/1
+description Uplink a Router Fin-RH
+switchport mode trunk
+switchport trunk allowed vlan 10
+switchport nonegotiate
+exit
+
+! Enlace a SwitchFinSec (trunk solo VLAN 10)
+interface g0/2
+description Trunk a SwitchFinSec g0/1
+switchport mode trunk
+switchport trunk allowed vlan 10
+switchport nonegotiate
+exit
+
+
+end
+wr
+
+! seguridad switches
+ena
+conf t
+
+! ===== Clave para modo privilegiado =====
+enable secret N3x@2025
+
+! ===== Console =====
+line console 0
+ password N3x@2025
+ login
+ logging synchronous
+exit
+
+! ===== VTY (0 a 4) =====
+line vty 0 4
+password N3x@2025
+login
+logging synchronous
+exit
+
+end
+wr
+
+################## SwitcheFinSec ##########################
+ena
+conf t
+hostname SwitchFinSec
+no ip domain-lookup
+
+vlan 10
+name FINANZAS
+exit
+
+! Puertos de usuario a VLAN 10
+interface range fa0/1-24
+switchport mode access
+switchport access vlan 10
+exit
+
+! Enlace desde este switch a SwitchFin (trunk)
+interface g0/1
+description Trunk a SwitchFin g0/2
+switchport mode trunk
+switchport trunk allowed vlan 10
+switchport nonegotiate
+exit
+
+
+end
+wr
+
+! seguridad switches
+ena
+conf t
+
+! ===== Clave para modo privilegiado =====
+enable secret N3x@2025
+
+! ===== Console =====
+line console 0
+ password N3x@2025
+ login
+ logging synchronous
+exit
+
+! ===== VTY (0 a 4) =====
+line vty 0 4
+password N3x@2025
+login
+logging synchronous
+exit
+
+end
+wr
+
+################## SwitcheRH ##########################
+ena
+conf t
+hostname SwitchRH
+no ip domain-lookup
+
+vlan 20
+ name RH
+exit
+
+! Puertos de usuario a VLAN 20
+interface range fa0/1-24
+switchport mode access
+switchport access vlan 20
+exit
+
+! Uplink al router en VLAN 20 (si aplica)
+interface g0/1
+description Uplink a Router Fin-RH (VLAN 20)
+switchport mode trunk
+switchport trunk allowed vlan 20
+switchport nonegotiate
+exit
+
+
+end
+wr
+
+! seguridad switches
+ena
+conf t
+
+! ===== Clave para modo privilegiado =====
+enable secret N3x@2025
+
+! ===== Console =====
+line console 0
+ password N3x@2025
+ login
+ logging synchronous
+exit
+
+! ===== VTY (0 a 4) =====
+line vty 0 4
+password N3x@2025
+login
+logging synchronous
+exit
+
+end
+wr
+
+################## SwitcheAdmin-TI ##########################
+ena
+conf t
+hostname SwitchAdmin-TI
+no ip domain-lookup
+
+vlan 30
+name ADMIN
+vlan 40
+name TI
+exit
+
+! Fa0/1 - Fa0/12 en VLAN 30
+interface range fa0/1-12
+switchport mode access
+switchport access vlan 30
+exit
+
+! Fa0/13 - Fa0/24 en VLAN 40
+interface range fa0/13-24
+switchport mode access
+switchport access vlan 40
+spanning-tree portfast
+spanning-tree bpduguard enable
+exit
+
+! Uplink al Router Admin-TI por G0/1 como trunk (router-on-a-stick)
+interface g0/1
+description Trunk a Router Admin-TI
+switchport mode trunk
+switchport trunk allowed vlan 30,40
+switchport nonegotiate
+exit
+
+
+end
+wr
+
+! seguridad switches
+ena
+conf t
+
+! ===== Clave para modo privilegiado =====
+enable secret N3x@2025
+
+! ===== Console =====
+line console 0
+ password N3x@2025
+ login
+ logging synchronous
+exit
+
+! ===== VTY (0 a 4) =====
+line vty 0 4
+password N3x@2025
+login
+logging synchronous
+exit
+
+end
+wr

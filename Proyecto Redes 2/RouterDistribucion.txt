@@ -1,0 +1,121 @@
+############### RouterFin-RH ###################################
+ena
+conf t
+hostname RouterFin-RH
+no ip domain-lookup
+
+interface Serial0/1/1
+description Conexión a RouterPrincipal
+ip address 192.168.1.34 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+interface Serial0/2/1
+description Conexión a RouterAdmin-TI
+ip address 192.168.1.41 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+! OSPF
+router ospf 1
+network 192.168.0.0 0.0.0.127 area 0
+network 192.168.0.128 0.0.0.63 area 0
+network 192.168.1.32 0.0.0.3 area 0
+network 192.168.1.40 0.0.0.3 area 0
+exit
+
+interface GigabitEthernet0/0/0
+description Hacia SwitchFin (trunk VLAN 10)
+no shutdown
+exit
+
+interface GigabitEthernet0/0/1
+description Hacia SwitchRH (trunk VLAN 20)
+no shutdown
+exit
+
+! Subif VLAN 10 (Finanzas) 192.168.0.0/25  Gateway .1
+interface GigabitEthernet0/0/0.10
+encapsulation dot1Q 10
+description VLAN10-Finanzas
+ip address 192.168.0.1 255.255.255.128
+exit
+
+! Subif VLAN 20 (RRHH) 192.168.0.128/26  Gateway .129
+interface GigabitEthernet0/0/1.20
+encapsulation dot1Q 20
+description VLAN20-RRHH
+ip address 192.168.0.129 255.255.255.192
+exit
+
+ip dhcp pool VLAN10_FIN
+network 192.168.0.0 255.255.255.128
+default-router 192.168.0.1
+dns-server 192.168.1.2
+domain-name nexacapital.com
+
+
+ip dhcp pool VLAN20_RH
+network 192.168.0.128 255.255.255.192
+default-router 192.168.0.129
+dns-server 192.168.1.2
+domain-name nexacapital.com
+
+############### RouterAdmin-TI ###################################
+ena
+conf t
+hostname RouterAdmin-TI
+no ip domain-lookup
+
+interface Serial0/2/0
+description Conexión a RouterPrincipal
+ip address 192.168.1.38 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+interface Serial0/2/1
+description Conexión a RouterFin-RH
+ip address 192.168.1.42 255.255.255.252
+bandwidth 1544
+no shutdown
+exit
+
+! OSPF
+router ospf 1
+network 192.168.0.192 0.0.0.63 area 0
+network 192.168.1.0 0.0.0.31 area 0
+network 192.168.1.36 0.0.0.3 area 0
+network 192.168.1.40 0.0.0.3 area 0
+exit
+
+interface GigabitEthernet0/0/0
+description Hacia SwitchAdmin-TI (trunk 30,40)
+no shutdown
+exit
+
+interface GigabitEthernet0/0/0.30
+encapsulation dot1Q 30
+description VLAN30-Admin
+ip address 192.168.0.193 255.255.255.192
+exit
+
+interface GigabitEthernet0/0/0.40
+encapsulation dot1Q 40
+description VLAN40-TI
+ip address 192.168.1.1 255.255.255.224
+exit
+
+ip dhcp pool VLAN30_ADMIN
+network 192.168.0.192 255.255.255.192
+default-router 192.168.0.193
+dns-server 192.168.1.2
+domain-name nexacapital.com
+
+ip dhcp pool VLAN40_TI
+network 192.168.1.0 255.255.255.224
+default-router 192.168.1.1
+dns-server 192.168.1.2
+domain-name nexacapital.com
