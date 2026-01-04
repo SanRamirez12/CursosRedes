@@ -1,137 +1,137 @@
-# 🧩 Proyecto de Redes I – Contabiliza S.A.  
-**Configuración de Servidor DHCP, DNS e Infraestructura de Red Empresarial Segmentada**
+# Networks I Project – Contabiliza S.A.  
+**DHCP & DNS Server Configuration and Segmented Enterprise Network Infrastructure**
 
 ---
 
-## 📘 Descripción General
-Este proyecto tiene como objetivo la **modernización completa de la infraestructura de red** de la empresa contable **Contabiliza S.A.**, mediante la **implementación de servicios de red internos** y la **segmentación lógica por VLANs**.  
-El diseño fue desarrollado como parte del curso **Redes I (BIS-13)** en la **Universidad Latina de Costa Rica**, aplicando estándares y metodologías reales de ingeniería de redes.
+## General Description
+This project aims at the **complete modernization of the network infrastructure** of the accounting company **Contabiliza S.A.**, through the **implementation of internal network services** and **logical segmentation using VLANs**.  
+The design was developed as part of the course **Networks I (BIS-13)** at the **Universidad Latina de Costa Rica**, applying real-world networking engineering standards and methodologies.
 
-El trabajo abarca la **configuración de un servidor DHCP y DNS**, la **integración de un servidor de correo interno**, una **intranet corporativa**, y la **implementación de un cableado estructurado** basado en **categoría 6** y puntos de acceso inalámbricos **Wi-Fi 6**, todo validado mediante simulación en **Cisco Packet Tracer**.
-
----
-
-## 🎯 Objetivos del Proyecto
-
-- Automatizar la asignación de direcciones IP mediante un **servidor DHCP centralizado**.  
-- Implementar un **servidor DNS interno** para la resolución de nombres locales.  
-- Segmentar la red mediante **VLANs** para cada departamento (Administración, Ventas, Soporte Técnico, Almacén y Servicios).  
-- Integrar servicios internos: **correo electrónico (SMTP/IMAP)** e **intranet web corporativa**.  
-- Mejorar la **seguridad, rendimiento y escalabilidad** de la red de la empresa.  
-- Cumplir con **estándares de cableado y protocolos IEEE** vigentes.
+The project covers the **configuration of DHCP and DNS servers**, the **integration of an internal mail server**, a **corporate intranet**, and the **implementation of structured cabling** based on **Category 6**, along with **Wi-Fi 6 wireless access points**, all validated through simulation in **Cisco Packet Tracer**.
 
 ---
 
-## 🏗️ Arquitectura General del Sistema de Red
+## Project Objectives
 
-El diseño se basa en una **arquitectura jerárquica empresarial**:
-
-### 🔹 Capa de Acceso
-- Switches gestionables con VLANs (Administración, Ventas, Soporte, Almacén, Servicios).  
-- Cableado estructurado **Cat 6** según norma **TIA/EIA-568**.  
-- Integración de puntos de acceso inalámbricos **Wi-Fi 6 (802.11ax)**.
-
-### 🔹 Capa de Distribución
-- Routers con **enrutamiento inter-VLAN** y **subneteo VLSM** optimizado.  
-- Configuración de políticas de acceso y direccionamiento interno por departamento.  
-
-### 🔹 Capa de Núcleo / Servidores
-- **Servidor DHCP:** Asignación dinámica de IPs segmentada por VLAN.  
-- **Servidor DNS:** Resolución de nombres internos (ej. `intranet.contabiliza.local`).  
-- **Servidor Web:** Intranet corporativa para noticias, documentos y recursos internos.  
-- **Servidor de Correo:** SMTP/IMAP bajo dominio interno (`@contabiliza.local`).  
+- Automate IP address assignment using a **centralized DHCP server**.  
+- Implement an **internal DNS server** for local name resolution.  
+- Segment the network using **VLANs** for each department (Administration, Sales, Technical Support, Warehouse, and Services).  
+- Integrate internal services: **email (SMTP/IMAP)** and a **corporate web intranet**.  
+- Improve the **security, performance, and scalability** of the company’s network.  
+- Comply with current **cabling standards and IEEE protocols**.
 
 ---
 
-## ⚙️ Tecnologías y Herramientas
+## General Network System Architecture
 
-| Categoría | Tecnologías |
-|------------|-------------|
-| **Simulación** | Cisco Packet Tracer |
-| **Protocolos de Red** | VLANs, DHCP, DNS, SMTP/IMAP, HTTP, ICMP |
-| **Hardware (simulado)** | Routers TP-Link BE19000, Switches Gigabit administrables, Access Points Wi-Fi 6 |
-| **Cableado** | Categoría 6 (TIA-568), Patch Panels, RJ45 |
-| **Sistemas Operativos** | Windows Server 2022, Ubuntu Server |
-| **Servicios Implementados** | DHCP, DNS, Mail Server, Web Server (Intranet) |
-| **Estándares aplicados** | IEEE 802.3, IEEE 802.11ax, ISO/IEC 27001, TIA-568 |
+The design is based on an **enterprise hierarchical architecture**:
 
----
+### Access Layer
+- Managed switches with VLANs (Administration, Sales, Support, Warehouse, Services).  
+- **Cat 6 structured cabling** according to the **TIA/EIA-568** standard.  
+- Integration of **Wi-Fi 6 (802.11ax)** wireless access points.
 
-## 🧮 Plan de Direccionamiento IP
+### Distribution Layer
+- Routers with **inter-VLAN routing** and optimized **VLSM subnetting**.  
+- Configuration of access policies and internal addressing per department.
 
-| Departamento | VLAN | Subred | Rango de IPs | Gateway |
-|---------------|------|---------|--------------|----------|
-| Administración | 10 | 192.168.10.0/26 | .1–.62 | 192.168.10.1 |
-| Ventas | 20 | 192.168.20.0/25 | .1–.126 | 192.168.20.1 |
-| Soporte Técnico | 30 | 192.168.30.0/27 | .1–.30 | 192.168.30.1 |
-| Almacén | 40 | 192.168.40.0/28 | .1–.14 | 192.168.40.1 |
-| Servicios | 50 | 192.168.50.0/28 | .1–.14 | 192.168.50.1 |
+### Core / Server Layer
+- **DHCP Server:** Dynamic IP assignment segmented by VLAN.  
+- **DNS Server:** Internal name resolution (e.g., `intranet.contabiliza.local`).  
+- **Web Server:** Corporate intranet for news, documents, and internal resources.  
+- **Mail Server:** SMTP/IMAP under an internal domain (`@contabiliza.local`).
 
 ---
 
-## 🔐 Seguridad y Buenas Prácticas
+## Technologies and Tools
 
-- Segmentación por VLANs para aislar tráfico entre departamentos.  
-- Contraseñas seguras y acceso restringido por roles (consola, VTY).  
-- Políticas de firewall y ACLs para controlar acceso entre VLANs.  
-- Servidores internos protegidos y autenticados dentro de red local.  
-- Cableado estructurado bajo normativa TIA/EIA-568 para minimizar interferencias.  
-- Control de tráfico y priorización mediante QoS y administración centralizada.  
-
----
-
-## 🧪 Pruebas de Validación
-
-✅ **DHCP:** Asignación automática de IPs por VLAN.  
-✅ **DNS:** Resolución correcta de dominios internos.  
-✅ **Correo interno:** Envío y recepción local mediante SMTP/IMAP.  
-✅ **Intranet:** Acceso web interno desde todos los departamentos.  
-✅ **Wi-Fi:** Conectividad estable bajo WPA3 y VLAN asignada.  
-✅ **Simulación:** Conectividad validada en Cisco Packet Tracer sin pérdida de paquetes.  
+| Category | Technologies |
+|---------|--------------|
+| **Simulation** | Cisco Packet Tracer |
+| **Network Protocols** | VLANs, DHCP, DNS, SMTP/IMAP, HTTP, ICMP |
+| **Hardware (simulated)** | TP-Link BE19000 Routers, Managed Gigabit Switches, Wi-Fi 6 Access Points |
+| **Cabling** | Category 6 (TIA-568), Patch Panels, RJ45 |
+| **Operating Systems** | Windows Server 2022, Ubuntu Server |
+| **Implemented Services** | DHCP, DNS, Mail Server, Web Server (Intranet) |
+| **Applied Standards** | IEEE 802.3, IEEE 802.11ax, ISO/IEC 27001, TIA-568 |
 
 ---
 
-## 📈 Resultados Principales
+## IP Addressing Plan
 
-- Eliminación de conflictos de IP y reducción del 100% en configuraciones manuales.  
-- Mejora del rendimiento de red y segregación del tráfico interno.  
-- Red inalámbrica estable y segura con cobertura total.  
-- Integración exitosa de servicios internos (DNS, correo, intranet).  
-- Escalabilidad para futuras expansiones sin rediseño completo.  
-
----
-
-## 💡 Recomendaciones Futuras
-
-- Implementar redundancia en servidores (clúster DHCP/DNS).  
-- Agregar **monitorización en tiempo real (SNMP/Nagios)**.  
-- Aplicar políticas avanzadas de seguridad (IDS/IPS, segmentación adicional).  
-- Migrar servicios críticos a infraestructura híbrida (on-premise + nube).  
-- Documentar mantenimiento preventivo y plan de expansión.  
+| Department | VLAN | Subnet | IP Range | Gateway |
+|------------|------|--------|----------|----------|
+| Administration | 10 | 192.168.10.0/26 | .1–.62 | 192.168.10.1 |
+| Sales | 20 | 192.168.20.0/25 | .1–.126 | 192.168.20.1 |
+| Technical Support | 30 | 192.168.30.0/27 | .1–.30 | 192.168.30.1 |
+| Warehouse | 40 | 192.168.40.0/28 | .1–.14 | 192.168.40.1 |
+| Services | 50 | 192.168.50.0/28 | .1–.14 | 192.168.50.1 |
 
 ---
 
-## 🧑‍💻 Autores
+## Security and Best Practices
+
+- VLAN-based segmentation to isolate traffic between departments.  
+- Secure passwords and role-based access (console, VTY).  
+- Firewall policies and ACLs to control inter-VLAN access.  
+- Protected and authenticated internal servers within the local network.  
+- Structured cabling compliant with TIA/EIA-568 to minimize interference.  
+- Traffic control and prioritization through QoS and centralized management.
+
+---
+
+## Validation Tests
+
+✅ **DHCP:** Automatic IP assignment per VLAN.  
+✅ **DNS:** Correct resolution of internal domains.  
+✅ **Internal Mail:** Local sending and receiving via SMTP/IMAP.  
+✅ **Intranet:** Internal web access from all departments.  
+✅ **Wi-Fi:** Stable connectivity using WPA3 and VLAN assignment.  
+✅ **Simulation:** Connectivity validated in Cisco Packet Tracer with no packet loss.
+
+---
+
+## Main Results
+
+- Elimination of IP conflicts and a 100% reduction in manual configurations.  
+- Improved network performance and internal traffic segregation.  
+- Stable and secure wireless network with full coverage.  
+- Successful integration of internal services (DNS, mail, intranet).  
+- Scalability for future expansions without complete redesign.
+
+---
+
+## Future Recommendations
+
+- Implement server redundancy (DHCP/DNS clusters).  
+- Add **real-time monitoring (SNMP/Nagios)**.  
+- Apply advanced security policies (IDS/IPS, additional segmentation).  
+- Migrate critical services to a hybrid infrastructure (on-premise + cloud).  
+- Document preventive maintenance and expansion plans.
+
+---
+
+## Authors
 
 - **Santiago Ramírez Elizondo**  
 - **Jonatan Fabricio Grande López**
 
-Profesor: *Bryan Vega Rondón*  
-Curso: *Redes I – Universidad Latina de Costa Rica*  
-Fecha: *Febrero 2025*
+Instructor: *Bryan Vega Rondón*  
+Course: *Networks I – Universidad Latina de Costa Rica*  
+Date: *April 2025*
 
 ---
 
-## 📎 Archivos Incluidos
+## Included Files
 
-- 🗂️ `ProyectoContabilizaSA_Redes1.pkt` → Topología en Cisco Packet Tracer  
-- 📄 `Documentación Técnica.pdf` → Detalles de configuración, VLANs, DHCP/DNS  
-- 🧾 `README.md` → Este documento  
+-  `ProyectoContabilizaSA_Redes1.pkt` → Cisco Packet Tracer topology  
+-  `Technical_Documentation.pdf` → Configuration details, VLANs, DHCP/DNS  
+-  `README.md` → This document
 
 ---
 
-## 🏁 Licencia
-Proyecto académico para fines educativos.  
-Puedes utilizar este contenido como referencia citando a los autores y la institución.
+##  License
+Academic project for educational purposes.  
+You may use this content as a reference by citing the authors and the institution.
 
 ---
