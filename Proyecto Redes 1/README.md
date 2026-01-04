@@ -82,12 +82,12 @@ The design is based on an **enterprise hierarchical architecture**:
 
 ## Validation Tests
 
-✅ **DHCP:** Automatic IP assignment per VLAN.  
-✅ **DNS:** Correct resolution of internal domains.  
-✅ **Internal Mail:** Local sending and receiving via SMTP/IMAP.  
-✅ **Intranet:** Internal web access from all departments.  
-✅ **Wi-Fi:** Stable connectivity using WPA3 and VLAN assignment.  
-✅ **Simulation:** Connectivity validated in Cisco Packet Tracer with no packet loss.
+- **DHCP:** Automatic IP assignment per VLAN.  
+- **DNS:** Correct resolution of internal domains.  
+- **Internal Mail:** Local sending and receiving via SMTP/IMAP.  
+- **Intranet:** Internal web access from all departments.  
+- **Wi-Fi:** Stable connectivity using WPA3 and VLAN assignment.  
+- **Simulation:** Connectivity validated in Cisco Packet Tracer with no packet loss.
 
 ---
 
