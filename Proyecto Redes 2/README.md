@@ -1,122 +1,122 @@
-# 🧩 Proyecto Final – Redes II  
-**Diseño e Implementación de una Infraestructura de Red Segmentada con VLANs, Servicios Integrados y Ciberseguridad Básica**
+# Final Project – Networks II  
+**Design and Implementation of a Segmented Network Infrastructure with VLANs, Integrated Services, and Basic Cybersecurity**
 
 ---
 
-## 📘 Descripción General
-Este proyecto presenta el diseño y la implementación de una **infraestructura de red segmentada** para la empresa ficticia **NexaCapital S.A.**, dedicada a servicios financieros y de inversión.  
-El objetivo fue construir una red **escalable, segura y funcional** bajo un entorno multidepartamental, integrando servicios esenciales como **DNS, DHCP, correo corporativo, intranet HTTP**, y mecanismos básicos de **ciberseguridad** mediante **ACLs** y segmentación por **VLANs**.
+## General Description
+This project presents the design and implementation of a **segmented network infrastructure** for the fictional company **NexaCapital S.A.**, dedicated to financial and investment services.  
+The main objective was to build a **scalable, secure, and functional** network within a multi-department environment, integrating essential services such as **DNS, DHCP, corporate email, HTTP intranet**, and basic **cybersecurity mechanisms** through **ACLs** and **VLAN-based segmentation**.
 
 ---
 
-## 🎯 Objetivos Principales
+## Main Objectives
 
-- **Diseñar una red jerárquica** bajo el modelo de capas (Acceso – Distribución – Núcleo).  
-- **Segmentar la red** mediante VLANs para mejorar seguridad y rendimiento.  
-- **Automatizar servicios de red** con DNS, DHCP y correo interno.  
-- **Implementar protocolos de enrutamiento dinámico** (OSPF y BGP) para garantizar conectividad interna y externa.  
-- **Aplicar medidas de seguridad básicas**, como ACLs, contraseñas seguras y protección de puertos.  
-- **Cumplir con normativas internacionales** como ISO 27001 y la Ley 8968 de Protección de Datos Personales (Costa Rica).
-
----
-
-## 🏗️ Arquitectura General
-
-**Topología jerárquica de red:**
-- **Capa de acceso:** Switches gestionables con VLANs 10 (Finanzas), 20 (RRHH), 30 (Administración) y 40 (TI).  
-- **Capa de distribución:** Routers intermedios con configuración *router-on-a-stick* y OSPF.  
-- **Capa núcleo:** Router principal con conexión a ISP y sesión BGP establecida para intercambio de rutas.
-
-**Servicios integrados:**
-- **DNS:** Resolución interna de nombres (Bind / Windows Server).  
-- **DHCP:** Asignación dinámica de direcciones IP por VLAN.  
-- **HTTP:** Intranet corporativa accesible desde todos los departamentos.  
-- **Correo corporativo:** SMTP / POP3 configurados para comunicación interna.  
-- **ACLs:** Control de tráfico entre departamentos para segmentación lógica y seguridad.
+- **Design a hierarchical network** following the layered model (Access – Distribution – Core).  
+- **Segment the network** using VLANs to improve security and performance.  
+- **Automate network services** with DNS, DHCP, and internal email.  
+- **Implement dynamic routing protocols** (OSPF and BGP) to ensure internal and external connectivity.  
+- **Apply basic security measures**, such as ACLs, secure passwords, and port protection.  
+- **Comply with international standards** such as ISO 27001 and Costa Rica’s Personal Data Protection Law (Law 8968).
 
 ---
 
-## 🧰 Tecnologías Utilizadas
+## General Architecture
 
-| Categoría | Tecnologías |
-|------------|-------------|
-| **Simulación** | Cisco Packet Tracer |
-| **Protocolos** | VLANs, OSPF, BGP, DHCP, DNS, SMTP/POP3, HTTP |
-| **Seguridad** | ACLs, Port-Security, Password Encryption, BPDU Guard |
-| **Estándares aplicados** | IEEE 802.1Q, 802.11ax, ISO/IEC 27001, TIA-568, Ley 8968 |
-| **Hardware simulado** | Routers, switches, servidores, PCs, puntos de acceso |
+**Hierarchical network topology:**
+- **Access layer:** Managed switches with VLANs 10 (Finance), 20 (HR), 30 (Administration), and 40 (IT).  
+- **Distribution layer:** Intermediate routers using *router-on-a-stick* configuration and OSPF.  
+- **Core layer:** Main router connected to the ISP with an established BGP session for route exchange.
 
----
-
-## 🧮 Plan de Direccionamiento IP
-
-| Departamento | VLAN | Subred | Rango de IPs | Gateway |
-|---------------|------|---------|--------------|----------|
-| Finanzas | 10 | 192.168.0.0/25 | .0 – .127 | 192.168.0.1 |
-| RRHH | 20 | 192.168.0.128/26 | .128 – .191 | 192.168.0.129 |
-| Administración | 30 | 192.168.0.192/26 | .192 – .255 | 192.168.0.193 |
-| TI | 40 | 192.168.1.0/27 | .0 – .31 | 192.168.1.1 |
-
-Enlaces seriales /30 entre routers y conexión ISP con BGP (red 10.0.0.0/30).
+**Integrated services:**
+- **DNS:** Internal name resolution (Bind / Windows Server).  
+- **DHCP:** Dynamic IP address assignment per VLAN.  
+- **HTTP:** Corporate intranet accessible from all departments.  
+- **Corporate email:** SMTP / POP3 configured for internal communication.  
+- **ACLs:** Traffic control between departments for logical segmentation and security.
 
 ---
 
-## 🔐 Medidas de Seguridad
+## Technologies Used
 
-- Configuración de **ACLs** para limitar el tráfico inter-VLAN.  
-- **Contraseñas cifradas** y autenticación en consola y VTY.  
-- **Port-Security** y **BPDU Guard** en switches de acceso.  
-- Políticas de **contraseña segura y control de acceso**.  
-- Segmentación y aislamiento de tráfico sensible por departamento.  
-
----
-
-## 🧪 Pruebas Realizadas
-
-- **Conectividad interna:** Ping exitoso entre VLANs vía OSPF.  
-- **DHCP/DNS:** Asignación automática de IPs y resolución correcta de dominios internos.  
-- **HTTP:** Intranet corporativa funcional desde todos los departamentos.  
-- **Correo electrónico:** SMTP funcional; pruebas POP3 parcialmente exitosas (ajuste en servidor).  
-- **BGP:** Sesión establecida con ISP (pendiente redistribución NAT para ping externo).  
-- **Seguridad:** Sin violaciones en port-security; ACLs planificadas y probadas.
+| Category | Technologies |
+|----------|--------------|
+| **Simulation** | Cisco Packet Tracer |
+| **Protocols** | VLANs, OSPF, BGP, DHCP, DNS, SMTP/POP3, HTTP |
+| **Security** | ACLs, Port-Security, Password Encryption, BPDU Guard |
+| **Applied Standards** | IEEE 802.1Q, 802.11ax, ISO/IEC 27001, TIA-568, Law 8968 |
+| **Simulated Hardware** | Routers, switches, servers, PCs, access points |
 
 ---
 
-## 📈 Resultados y Aprendizajes
+## IP Addressing Plan
 
-- Lograda **conectividad total** entre departamentos y funcionamiento correcto de servicios DNS/DHCP.  
-- Establecida **sesión BGP** con ISP y OSPF entre routers internos.  
-- **Segmentación VLAN exitosa** y tráfico controlado entre áreas.  
-- Identificados puntos de mejora: redistribución BGP→OSPF y configuración POP3.  
-- Se aplicaron buenas prácticas de documentación, nomenclatura y estandarización.
+| Department | VLAN | Subnet | IP Range | Gateway |
+|------------|------|--------|----------|----------|
+| Finance | 10 | 192.168.0.0/25 | .0 – .127 | 192.168.0.1 |
+| HR | 20 | 192.168.0.128/26 | .128 – .191 | 192.168.0.129 |
+| Administration | 30 | 192.168.0.192/26 | .192 – .255 | 192.168.0.193 |
+| IT | 40 | 192.168.1.0/27 | .0 – .31 | 192.168.1.1 |
 
----
-
-## 💡 Recomendaciones Técnicas
-
-- Implementar **SSH**, **AAA** y **autenticación OSPF** para reforzar seguridad.  
-- Agregar **HSRP/VRRP** y **EtherChannel** para alta disponibilidad.  
-- Incluir **DHCP Snooping**, **DAI** y **QoS** para voz/datos.  
-- Documentar configuraciones y mantener respaldos automáticos.  
-- Preparar migración gradual a **infraestructura híbrida (on-premise + nube)**.
+/30 serial links between routers and ISP connection using BGP (network 10.0.0.0/30).
 
 ---
 
-## 🧑‍💻 Autores
+## Security Measures
+
+- **ACL configuration** to limit inter-VLAN traffic.  
+- **Encrypted passwords** and authentication on console and VTY lines.  
+- **Port-Security** and **BPDU Guard** on access switches.  
+- Secure password policies and **access control** enforcement.  
+- Segmentation and isolation of sensitive traffic by department.
+
+---
+
+## Tests Performed
+
+- **Internal connectivity:** Successful ping between VLANs via OSPF.  
+- **DHCP/DNS:** Automatic IP assignment and correct resolution of internal domains.  
+- **HTTP:** Functional corporate intranet from all departments.  
+- **Email:** SMTP functional; POP3 partially successful (server tuning pending).  
+- **BGP:** Session established with ISP (pending NAT redistribution for external ping).  
+- **Security:** No port-security violations; ACLs planned and tested.
+
+---
+
+## Results and Lessons Learned
+
+- **Full connectivity achieved** between departments with correct DNS/DHCP service operation.  
+- **BGP session established** with the ISP and OSPF running between internal routers.  
+- **Successful VLAN segmentation** and controlled inter-department traffic.  
+- Identified improvement areas: BGP→OSPF redistribution and POP3 configuration.  
+- Applied best practices in documentation, naming conventions, and standardization.
+
+---
+
+## Technical Recommendations
+
+- Implement **SSH**, **AAA**, and **OSPF authentication** to strengthen security.  
+- Add **HSRP/VRRP** and **EtherChannel** for high availability.  
+- Include **DHCP Snooping**, **DAI**, and **QoS** for voice/data traffic.  
+- Document configurations and maintain automated backups.  
+- Prepare gradual migration to a **hybrid infrastructure (on-premise + cloud)**.
+
+---
+
+## Authors
 
 - **Santiago Ramírez Elizondo**  
 - **David Abarca Chaves**  
 - **Alberto Álvarez Navarro**  
 - **Sebastián Chaves Solano**
 
-Profesor: *Daniel Adolfo Ramírez González*  
-Curso: *BTI-13 Redes II – Universidad Latina de Costa Rica*  
-Fecha: *Mayo 2025*
+Instructor: *Daniel Adolfo Ramírez González*  
+Course: *BTI-13 Networks II – Universidad Latina de Costa Rica*  
+Date: *August 2025*
 
 ---
 
+## 🏁 License
+This project was developed for educational purposes under the **Networks II** course.  
+You may use it as an academic reference by citing the authors.
 
-## 🏁 Licencia
-Este proyecto se desarrolló con fines educativos bajo el curso **Redes II**.  
-Puedes usarlo como referencia académica citando a los autores.
-
+---
